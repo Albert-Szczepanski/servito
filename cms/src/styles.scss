@@ -26,5 +26,42 @@ button{
     padding: 10px;
     font-family: $primaryFont;
     color: $fontLight;
+    cursor: pointer;
+    transition: background-color 0.5s;
+    &:hover{
+      background-color: $primaryColorDark;
+      transition: background-color 0.5s;
+      cursor: pointer;
+    }
+  }
+
+}
+
+input{
+  border: none;
+  border-bottom: 1px solid $primaryColor;
+  height: 30px;
+  color: $primaryColorLight;
+  transition: color 0.5s, border-bottom 0.5s;
+  &:focus{
+    color: $primaryColor;
+    border: none;
+    border-bottom: 1px solid $primaryColorDark;
+    outline: none;
+    transition: color 0.5s, border-bottom 0.5s;
+  }
+}
+
+.border{
+  &-alert{
+    border: 1px solid $alertColor;
+  }
+  &-shadow{
+    -webkit-box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.25);
+    -moz-box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.25);
+    box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.25);
+  }
+  &-none{
+    border: none;
   }
 }

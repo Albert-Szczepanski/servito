@@ -1,5 +1,5 @@
 <section>
-  <form>
+  <form class="border-shadow">
     <div class="login-form">
       <div class="login-form--section">
         <div class="login-form--section_image">
@@ -8,14 +8,14 @@
       </div>
       <div class="login-form--section">
         <label class="login-form--section_element" for="username"> {{infoService.translations.username}} </label>
-        <input class="login-form--section_element" id="username" type="text">
+        <input class="login-form--section_element" id="username" type="text" placeholder="{{infoService.translations.yourUserName}}">
       </div>
       <div class="login-form--section">
         <label class="login-form--section_element" for="password">{{infoService.translations.password}}</label>
-        <input class="login-form--section_element" id="password" type="password">
+        <input class="login-form--section_element" id="password" type="password" placeholder="{{infoService.translations.yourPassword}}">
       </div>
       <div class="login-form--section">
-        <button class="login-form--section_element primary">
+        <button class="login-form--section_button primary">
           {{infoService.translations.logIn}}
         </button>
       </div>

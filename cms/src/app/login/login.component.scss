@@ -13,18 +13,18 @@ form{
   justify-content: center;
   display: flex;
   max-width: 550px;
+  margin-bottom: 150px;
 }
 
 .login-form{
-  display: flex;
-  flex-direction: column;
+  max-width: 550px;
+  min-width: 250px;
   &--section{
     margin-top: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     &_element{
-      width: 100%;
       margin-left: 10px;
       margin-right: 10px;
     }
@@ -32,7 +32,16 @@ form{
       display: flex;
       align-self: center
     }
+    &_button{
+      margin-top: 25px;
+    }
   }
+}
+
+label{
+  font-weight: 300;
+  font-size: 12px;
+  color: grey;
 }
 
 img{

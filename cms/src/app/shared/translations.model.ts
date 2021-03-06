@@ -3,4 +3,6 @@ export interface ITranslations{
   username: string;
   submit: string;
   logIn: string;
+  yourUserName: string;
+  yourPassword: string;
 }

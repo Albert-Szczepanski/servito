@@ -7,13 +7,19 @@ $fontAlert: #F49097;
 $fontHighlight: #9381ff;
 $primaryColor: #9381ff;
 $secondaryColor: #662C91;
+$alertColor: #F49097;
+$successColor: #429EA6;
 
 
 $primaryColorDark: darken($primaryColor, 15%);
 $secondaryColorDark: darken($secondaryColor, 15%);
+$alertColorDark: darken($alertColor, 15%);
+$successColorDark: darken($successColor, 15%);
 
 $primaryColorLight: lighten($primaryColor, 15%);
 $secondaryColorLight: lighten($secondaryColor, 15%);
+$alertColorLight: lighten($alertColor, 15%);
+$successColorLight: lighten($successColor, 15%);
 
 $primaryFont: 'Montserrat', sans-serif;
 $headingFont: 'Oswald', sans-serif;
