@@ -4,31 +4,25 @@ import { IUserDto } from './dto/user.dto';
 import { UsersRepository } from './orm/users.repository';
 import { User } from './orm/users.entity';
 import * as bcrypt from "bcrypt";
+import {SharedService} from "../shared.service";
 
 @Injectable()
 export class UsersService {
     constructor(@InjectRepository(UsersRepository) 
-                private usersRepository: UsersRepository){}
+                private usersRepository: UsersRepository, private sharedService: SharedService){}
 
     // TODO Auth i check uprawnien,
     async createUser(userDto: IUserDto): Promise<User>{
-        const { username, email, password } = userDto;
+        const { username, email, password, passwordReset } = userDto;
         const user = new User();
-        const salt = await bcrypt.genSalt();
         user.email = email;
-        user.password = await this.hashPassword(password, salt);
-        user.salt = salt;
+        user.salt = await this.sharedService.generateSalt();1
+        user.password = await this.sharedService.hashPassword(password, user.salt);
         user.username = username;
         user.isAdmin = false;
-        user.passwordReset = true;
-        return await this.saveUser(user);
-    }
-
-    async saveUser(user: User): Promise<User>{
-        await user.save().catch(() => {
-            throw new ConflictException(`Email: ${user.email} or username: ${user.username} are already taken`)
-        });
-        return user;
+        if (passwordReset){user.passwordReset = passwordReset}
+        else{user.passwordReset = false}
+        return await this.sharedService.saveUser(user);
     }
 
     async updateUserInfo(userDto: IUserDto): Promise<User>{
@@ -38,27 +32,29 @@ export class UsersService {
         if (username) { user.username = username }
         if (email) { user.email = email }
 
-        return await this.saveUser(user);
+        return await this.sharedService.saveUser(user);
     }
 
     //TODO, dodać controller
     async changePassword(userDto: IUserDto): Promise<User>{
         const user = await this.usersRepository.findOne(userDto.id)
-        const salt = await bcrypt.genSalt();
-        user.password = await this.hashPassword(userDto.password, salt);
-        return await this.saveUser(user);
+        const salt = await this.sharedService.generateSalt()
+        user.password = await this.sharedService.hashPassword(userDto.password, salt);
+        return await this.sharedService.saveUser(user);
     }
 
     //TODO, dodać controller
     async setAdmin(userDto: IUserDto): Promise<User>{
         const user = await this.usersRepository.findOne(userDto.id)
-
-        return await this.saveUser(user);
+        user.isAdmin = userDto.isAdmin;
+        return await this.sharedService.saveUser(user);
     }
 
-    //TODO bcrypt
-    private async hashPassword(password:string, salt:string): Promise<string>{
-        return await bcrypt.hash(password, salt)
+    //TODO, dodać controller
+    async setPasswordChange(userDto: IUserDto): Promise<User>{
+        const user = await this.usersRepository.findOne(userDto.id)
+        user.passwordReset = userDto.passwordReset;
+        return await this.sharedService.saveUser(user);
     }
 
 }

@@ -3,5 +3,7 @@ export interface IUserDto {
     name: string;
     email: string;
     username: string;
-    password: string; 
+    password: string;
+    isAdmin: boolean;
+    passwordReset: boolean;
 }
