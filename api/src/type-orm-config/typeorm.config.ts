@@ -8,4 +8,5 @@ export const typeOrmConfigDev: TypeOrmModuleOptions = {
   database: 'servito',
   autoLoadEntities: true,
   synchronize: true,
+  useUnifiedTopology: true
 };

@@ -5,9 +5,9 @@ import {BaseEntity, Column, Entity, ObjectID, ObjectIdColumn, Unique} from "type
 export class User extends BaseEntity {
     @ObjectIdColumn()
     id: ObjectID;
-    @Column()
+    @Column({ unique: true })
     username: string;
-    @Column()
+    @Column({ unique: true })
     email: string;    
     @Column()
     password: string;

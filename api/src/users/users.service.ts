@@ -1,4 +1,4 @@
-import {ConflictException, Injectable} from '@nestjs/common';
+import {ConflictException, Injectable, NotFoundException} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IUserDto } from './dto/user.dto';
 import { UsersRepository } from './orm/users.repository';
@@ -21,32 +21,39 @@ export class UsersService {
         user.username = username;
         user.isAdmin = false;
         user.passwordReset = true;
-        await user.save().catch(err => {
-            throw new ConflictException(`Email: ${email} or username: ${username} already taken`)
+        return await this.saveUser(user);
+    }
+
+    async saveUser(user: User): Promise<User>{
+        await user.save().catch(() => {
+            throw new ConflictException(`Email: ${user.email} or username: ${user.username} are already taken`)
         });
         return user;
     }
 
-    //TODO tworzenie pierwszego admina
-    // async createFirstUser(userDto: IUserDto){
-    //     const { username, email, password } = userDto;
-    //     const user = new User();
-    //     user.email = email;
-    //     user.password = password;
-    //     user.username = username;
-    //     user.isAdmin = false;
-    //     user.passwordReset = true;
-    //     await user.save();
-    //     return user;
-    // }
-
     async updateUserInfo(userDto: IUserDto): Promise<User>{
-        const user = this.usersRepository.findOne(userDto.id);
-        if (await user){
-            return user;
-        }else{
-            console.log(user)
-        }
+        const { username, email } = userDto;
+        const user = await this.usersRepository.findOne(userDto.id)
+
+        if (username) { user.username = username }
+        if (email) { user.email = email }
+
+        return await this.saveUser(user);
+    }
+
+    //TODO, dodać controller
+    async changePassword(userDto: IUserDto): Promise<User>{
+        const user = await this.usersRepository.findOne(userDto.id)
+        const salt = await bcrypt.genSalt();
+        user.password = await this.hashPassword(userDto.password, salt);
+        return await this.saveUser(user);
+    }
+
+    //TODO, dodać controller
+    async setAdmin(userDto: IUserDto): Promise<User>{
+        const user = await this.usersRepository.findOne(userDto.id)
+
+        return await this.saveUser(user);
     }
 
     //TODO bcrypt
