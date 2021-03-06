@@ -1,4 +1,4 @@
-import {ConflictException, Injectable, NotFoundException} from '@nestjs/common';
+import {ConflictException, Injectable, NotFoundException, UnauthorizedException} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IUserDto } from './dto/user.dto';
 import { UsersRepository } from './orm/users.repository';
@@ -11,12 +11,13 @@ export class UsersService {
     constructor(@InjectRepository(UsersRepository) 
                 private usersRepository: UsersRepository, private sharedService: SharedService){}
 
-    // TODO Auth i check uprawnien,
-    async createUser(userDto: IUserDto): Promise<User>{
+    async createUser(userDto: IUserDto, reqUser: User): Promise<User>{
+        console.log(reqUser)
+        await this.sharedService.checkIfAdmin(reqUser);
         const { username, email, password, passwordReset } = userDto;
         const user = new User();
         user.email = email;
-        user.salt = await this.sharedService.generateSalt();1
+        user.salt = await this.sharedService.generateSalt();
         user.password = await this.sharedService.hashPassword(password, user.salt);
         user.username = username;
         user.isAdmin = false;
@@ -25,36 +26,36 @@ export class UsersService {
         return await this.sharedService.saveUser(user);
     }
 
-    async updateUserInfo(userDto: IUserDto): Promise<User>{
+    async updateUserInfo(userDto: IUserDto, reqUser: User): Promise<User>{
+        await this.sharedService.checkIfAdmin(reqUser);
         const { username, email } = userDto;
-        const user = await this.usersRepository.findOne(userDto.id)
 
-        if (username) { user.username = username }
-        if (email) { user.email = email }
+        if (username) { reqUser.username = username }
+        if (email) { reqUser.email = email }
 
-        return await this.sharedService.saveUser(user);
+        return await this.sharedService.saveUser(reqUser);
+    }
+
+    //TODO, przemyśleć strategię zmiany hasła
+
+    //TODO, dodać controller
+    async changePassword(userDto: IUserDto, reqUser: User): Promise<User>{
+        reqUser.password = await this.sharedService.hashPassword(userDto.password, reqUser.salt);
+        return await this.sharedService.saveUser(reqUser);
     }
 
     //TODO, dodać controller
-    async changePassword(userDto: IUserDto): Promise<User>{
-        const user = await this.usersRepository.findOne(userDto.id)
-        const salt = await this.sharedService.generateSalt()
-        user.password = await this.sharedService.hashPassword(userDto.password, salt);
-        return await this.sharedService.saveUser(user);
+    async setAdmin(userDto: IUserDto, reqUser: User): Promise<User>{
+        await this.sharedService.checkIfAdmin(reqUser);
+        const userToAdmin = await this.usersRepository.findOne(userDto.id)
+        userToAdmin.isAdmin = userDto.isAdmin;
+        return await this.sharedService.saveUser(reqUser);
     }
 
     //TODO, dodać controller
-    async setAdmin(userDto: IUserDto): Promise<User>{
-        const user = await this.usersRepository.findOne(userDto.id)
-        user.isAdmin = userDto.isAdmin;
-        return await this.sharedService.saveUser(user);
-    }
-
-    //TODO, dodać controller
-    async setPasswordChange(userDto: IUserDto): Promise<User>{
-        const user = await this.usersRepository.findOne(userDto.id)
-        user.passwordReset = userDto.passwordReset;
-        return await this.sharedService.saveUser(user);
+    async setPasswordChange(userDto: IUserDto, reqUser: User): Promise<User>{
+        reqUser.passwordReset = userDto.passwordReset;
+        return await this.sharedService.saveUser(reqUser);
     }
 
 }

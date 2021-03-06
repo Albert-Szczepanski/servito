@@ -1,0 +1,41 @@
+@import "../../global";
+
+section{
+  font-family: $primaryFont;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+form{
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  max-width: 550px;
+}
+
+.login-form{
+  display: flex;
+  flex-direction: column;
+  &--section{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    &_element{
+      width: 100%;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+    &_image{
+      display: flex;
+      align-self: center
+    }
+  }
+}
+
+img{
+  width: 50px;
+  margin: 30px;
+}

@@ -1,1 +1,30 @@
-/* You can add global styles to this file, and also import other style files */
+@import "global";
+
+h1{
+  font-family: $headingFont;
+}
+h2{
+  font-family: $headingFont;
+}
+h3{
+  font-family: $primaryFont;
+}
+h4{
+  font-family: $primaryFont;
+}
+h5{
+  font-family: $primaryFont;
+}
+p{
+  font-family: $primaryFont;
+}
+
+button{
+  &.primary{
+    border: none;
+    background-color: $primaryColor;
+    padding: 10px;
+    font-family: $primaryFont;
+    color: $fontLight;
+  }
+}

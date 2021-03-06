@@ -30,9 +30,11 @@ export class AuthService {
                 isAdmin: userInformation.isAdmin,
                 passwordReset: userInformation.passwordReset }
             const accessToken = await this.jwtService.sign(payload);
+
             const access: IAccess = {
                 accessToken: accessToken,
                 username: userInformation.username,
+                // TODO Poprawić generowanie date na zgodną z tokenem
                 expireDate: new Date()}
             return access }
     }

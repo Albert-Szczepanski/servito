@@ -1,4 +1,4 @@
-import {ConflictException, Injectable} from '@nestjs/common';
+import {ConflictException, Injectable, UnauthorizedException} from '@nestjs/common';
 import { User } from './users/orm/users.entity';
 import * as bcrypt from "bcrypt";
 import {UsersRepository} from "./users/orm/users.repository";
@@ -27,7 +27,15 @@ export class SharedService {
         await user.save().catch(() => {
             throw new ConflictException(`Email: ${user.email} or username: ${user.username} are already taken`)
         });
+        delete user.password;
+        delete user.salt;
         return user;
+    }
+
+    async checkIfAdmin(reqUser: User){
+        if (!reqUser.isAdmin){
+            throw new UnauthorizedException('Unauthorized')
+        }
     }
 
 }

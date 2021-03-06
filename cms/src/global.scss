@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;1,100;1,200;1,300;1,400&family=Oswald:wght@500;600;700&display=swap');
+
+$fontDark: #07070a;
+$fontLight: #fffffa;
+$fontSuccess: #429EA6;
+$fontAlert: #F49097;
+$fontHighlight: #9381ff;
+$primaryColor: #9381ff;
+$secondaryColor: #662C91;
+
+
+$primaryColorDark: darken($primaryColor, 15%);
+$secondaryColorDark: darken($secondaryColor, 15%);
+
+$primaryColorLight: lighten($primaryColor, 15%);
+$secondaryColorLight: lighten($secondaryColor, 15%);
+
+$primaryFont: 'Montserrat', sans-serif;
+$headingFont: 'Oswald', sans-serif;
