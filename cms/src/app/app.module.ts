@@ -25,7 +25,8 @@ import { loginReducer } from './login/store/login.reducer';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({login: loginReducer})
+    StoreModule.forRoot({login: loginReducer}),
+    StoreModule.forRoot({}, {})
   ],
   providers: [InfoService, AuthService],
   bootstrap: [AppComponent]
