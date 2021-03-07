@@ -1,9 +1,8 @@
-import {ConflictException, Injectable, NotFoundException, UnauthorizedException} from '@nestjs/common';
+import {Injectable, UnauthorizedException} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IUserDto } from './dto/user.dto';
 import { UsersRepository } from './orm/users.repository';
 import { User } from './orm/users.entity';
-import * as bcrypt from "bcrypt";
 import {SharedService} from "../shared.service";
 
 @Injectable()
@@ -24,6 +23,21 @@ export class UsersService {
         if (passwordReset){user.passwordReset = passwordReset}
         else{user.passwordReset = false}
         return await this.sharedService.saveUser(user);
+    }
+
+    async createFirstUser(userDto: IUserDto): Promise<User>{
+        const { username, email, password } = userDto;
+        const checkIfAnyUserExists = await this.usersRepository.find()
+        if (checkIfAnyUserExists.length === 0){
+            const user = new User();
+            user.email = email;
+            user.salt = await this.sharedService.generateSalt();
+            user.password = await this.sharedService.hashPassword(password, user.salt);
+            user.username = username;
+            user.isAdmin = true;
+            user.passwordReset = false;
+            return await this.sharedService.saveUser(user);
+        }else{throw new UnauthorizedException('Unauthorized action')}
     }
 
     async updateUserInfo(userDto: IUserDto, reqUser: User): Promise<User>{
