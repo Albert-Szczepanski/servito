@@ -2,7 +2,6 @@ import {Injectable, UnauthorizedException} from '@nestjs/common';
 import {InjectRepository} from "@nestjs/typeorm";
 import {UsersRepository} from "../users/orm/users.repository";
 import {IUserDto} from "../users/dto/user.dto";
-import {User} from "../users/orm/users.entity";
 import {SharedService} from "../shared.service";
 import {JwtService} from "@nestjs/jwt";
 import {IAccess, IAccessToken} from "./auth.model";
@@ -18,6 +17,7 @@ export class AuthService {
         const { username, password } = userDto;
 
         const userInformation = await this.sharedService.getUserInfoByUserName(username);
+        if (!userInformation){throw new UnauthorizedException('Incorrect credentials')}
         const hashedPassword = await this.sharedService.hashPassword(password, userInformation.salt);
 
         if (hashedPassword !== userInformation.password) {
