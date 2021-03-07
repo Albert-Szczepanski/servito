@@ -7,11 +7,14 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { UsersComponent } from './users/users.component';
 import { NavComponent } from './home/nav/nav.component';
-import { InfoService } from './shared/info.service';
+import { InfoService } from './shared/info/info.service';
 import { HttpClientModule } from '@angular/common/http';
-import { AuthService } from './shared/auth.service';
+import { AuthService } from './shared/auth/auth.service';
 import { StoreModule } from '@ngrx/store';
-import { loginReducer } from './login/store/login.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import * as fromApp from './store/app.reducer'
+import {EffectsModule} from "@ngrx/effects";
+import {AuthEffects} from "./shared/auth/store/auth.effects";
 
 @NgModule({
   declarations: [
@@ -25,8 +28,11 @@ import { loginReducer } from './login/store/login.reducer';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({login: loginReducer}),
-    StoreModule.forRoot({}, {})
+    StoreModule.forRoot(fromApp.appReducer),
+    EffectsModule.forRoot([AuthEffects]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+    }),
   ],
   providers: [InfoService, AuthService],
   bootstrap: [AppComponent]

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {InfoService} from './shared/info.service';
+import {InfoService} from './shared/info/info.service';
 
 @Component({
   selector: 'app-root',

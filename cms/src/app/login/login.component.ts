@@ -1,7 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {InfoService} from '../shared/info.service';
-import {AuthService} from '../shared/auth.service';
+import {InfoService} from '../shared/info/info.service';
+import {AuthService} from '../shared/auth/auth.service';
 import {Subscription} from "rxjs";
+import {Store} from "@ngrx/store";
+import {AuthRequestModel} from "../shared/auth/models/auth-request.model";
+import * as LoginActions from '../shared/auth/store/auth.actions';
+import * as fromApp from '../store/app.reducer';
+
 
 @Component({
   selector: 'app-login',
@@ -10,7 +15,7 @@ import {Subscription} from "rxjs";
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
-  constructor(public infoService: InfoService, private auth: AuthService) { }
+  constructor(public infoService: InfoService, private auth: AuthService, private store: Store<fromApp.AppState>) { }
   isAuth: boolean;
   private subscriptions = new Subscription();
 
@@ -21,12 +26,14 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.subscriptions.unsubscribe();
   }
 
-  getAuthToken(){
+  //TODO przerobić na NGRXa
+  getAuthToken(login:string, password:string): void{
     this.isAuth = false;
-    this.subscriptions.add(this.auth.getAuthToken('albert.szczepanski', 'Tes3mze').subscribe(data => {
-      console.log(data);
-    }, error => {
-      this.isAuth = true;
-    }));
+    const test = new AuthRequestModel()
+
+    // note for self
+    test.username = login;
+    test.password = password;
+    this.store.dispatch(new LoginActions.GetTokenStart(test))
   }
 }
