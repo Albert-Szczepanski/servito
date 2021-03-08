@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {InfoService} from './shared/info/info.service';
+import {TranslationsService} from './shared/translations/translations.service';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +7,7 @@ import {InfoService} from './shared/info/info.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
-  constructor(private infoService: InfoService) {
+  constructor(private infoService: TranslationsService) {
   }
   title = 'cms';
 

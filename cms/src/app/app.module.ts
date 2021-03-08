@@ -3,18 +3,19 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
-import { UsersComponent } from './users/users.component';
-import { NavComponent } from './home/nav/nav.component';
-import { InfoService } from './shared/info/info.service';
+import { LoginComponent } from './components/login/login.component';
+import { HomeComponent } from './components/home/home.component';
+import { UsersComponent } from './components/users/users.component';
+import { NavComponent } from './components/nav/nav.component';
+import { TranslationsService } from './shared/translations/translations.service';
 import { HttpClientModule } from '@angular/common/http';
-import { AuthService } from './shared/auth/auth.service';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import * as fromApp from './store/app.reducer'
 import {EffectsModule} from "@ngrx/effects";
-import {AuthEffects} from "./shared/auth/store/auth.effects";
+import {AuthEffects} from "./store/auth/auth.effects";
+import {FormsModule} from "@angular/forms";
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {AuthEffects} from "./shared/auth/store/auth.effects";
     LoginComponent,
     HomeComponent,
     UsersComponent,
-    NavComponent
+    NavComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -33,8 +35,9 @@ import {AuthEffects} from "./shared/auth/store/auth.effects";
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
     }),
+    FormsModule,
   ],
-  providers: [InfoService, AuthService],
+  providers: [TranslationsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,25 +1,25 @@
 <section>
-  <form class="border-shadow">
+  <form class="border-shadow" (ngSubmit)="getAuthToken(form)" #form="ngForm">
     <div class="login-form">
       <div class="login-form--section">
         <div class="login-form--section_image">
-          <img src="../../assets/favicon.png" alt="">
+          <img src="../../../assets/favicon.png" alt="">
         </div>
         <h3 class="login-form--section_app-name">Servito CMS</h3>
       </div>
-      <div class="message-box message-box--alert" [ngClass]="{'message-box--alert_visible': isAuth}">
+      <div class="message-box message-box--alert" [ngClass]="{'message-box--alert_visible': (authState|async).message === 'LOGIN_FAILED'}">
         <p>Nieprawidłowy login lub hasło</p>
       </div>
       <div class="login-form--section">
         <label class="login-form--section_element" for="username"> {{infoService.translations.username}} </label>
-        <input class="login login-form--section_element" id="username" type="text" placeholder="{{infoService.translations.yourUserName}}">
+        <input class="login login-form--section_element"  ngModel name="username" id="username" type="text" placeholder="{{infoService.translations.yourUserName}}">
       </div>
       <div class="login-form--section">
         <label class="login-form--section_element" for="password">{{infoService.translations.password}}</label>
-        <input class="login login-form--section_element" id="password" type="password" placeholder="{{infoService.translations.yourPassword}}">
+        <input class="login login-form--section_element" ngModel name="password" id="password" type="password" placeholder="{{infoService.translations.yourPassword}}">
       </div>
       <div class="login-form--section">
-        <button type="button" class="login-form--section_button primary" (click)="getAuthToken('albert.szczepanski', 'Tes3mze')">
+        <button type="submit" class="login-form--section_button primary">
           {{infoService.translations.logIn}}
         </button>
       </div>

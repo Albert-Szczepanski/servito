@@ -1,4 +1,4 @@
-import * as fromAuth from '../shared/auth/store/auth.reducer';
+import * as fromAuth from './auth/auth.reducer';
 import {ActionReducerMap} from "@ngrx/store";
 
 export interface AppState {

@@ -1,12 +1,13 @@
 import {Actions, createEffect, ofType} from '@ngrx/effects'
 import * as AuthActions from './auth.actions'
-import {catchError, map, switchMap} from "rxjs/operators";
+import {catchError, map, switchMap, tap} from "rxjs/operators";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {IAuthToken} from "../models/auth-token.model";
-import {environment} from "../../../../environments/environment";
+import {IAuthToken} from "../../models/auth/auth-token.model";
+import {environment} from "../../../environments/environment";
 import {of} from "rxjs";
 import {Injectable} from "@angular/core";
-import {User} from "../models/user.model";
+import {User} from "../../models/auth/user.model";
+import {Router} from "@angular/router";
 
 const options = {
   headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
@@ -14,7 +15,7 @@ const options = {
 
 @Injectable()
 export class AuthEffects {
-  constructor(private actions$: Actions, private http: HttpClient) {}
+  constructor(private actions$: Actions, private http: HttpClient, private router: Router) {}
 
 
   authLogin = createEffect(() => this.actions$.pipe(
@@ -31,10 +32,17 @@ export class AuthEffects {
           user.accessToken = res.accessToken
           return new AuthActions.GetTokenSuccess(user)
         }),
-        catchError(error => of(new AuthActions.GetTokenFailed(error.message))),
+        catchError(() => of(new AuthActions.GetTokenFailed('LOGIN_FAILED'))),
       )
     })
   ))
+
+  authSuccess = createEffect(() => this.actions$.pipe(
+    ofType(AuthActions.GET_TOKEN_SUCCESS),
+    tap(() => {
+      this.router.navigate(['home']);
+    })
+  ), {dispatch:false})
 
 
 }

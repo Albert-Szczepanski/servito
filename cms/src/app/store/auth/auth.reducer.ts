@@ -1,5 +1,5 @@
 import * as AuthActions from './auth.actions';
-import {User} from "../models/user.model";
+import {User} from "../../models/auth/user.model";
 
 export interface State {
   user: User
@@ -9,7 +9,7 @@ export interface State {
 
 const initialState = {
   user: null,
-  message: null,
+  message: 'Not logged in',
   isLoading: false,
 }
 
@@ -22,7 +22,7 @@ export function authReducer(
       return {
         ...state,
         user: null,
-        message: 'Loggin In',
+        message: 'LOGGING_IN',
         isLoading: true
       };
 
@@ -30,7 +30,7 @@ export function authReducer(
       return {
         ...state,
         user: action.payload,
-        message: 'Logged In',
+        message: 'LOGGED_IN',
         isLoading: false
       };
 
@@ -46,7 +46,7 @@ export function authReducer(
       return {
         ...state,
         user: null,
-        message: 'Logged Out',
+        message: 'LOGGED_OUT',
         isLoading: false
       };
 

@@ -1,6 +1,6 @@
 import {Action} from '@ngrx/store';
-import {AuthRequestModel} from '../models/auth-request.model';
-import {User} from "../models/user.model";
+import {AuthRequestModel} from '../../models/auth/auth-request.model';
+import {User} from "../../models/auth/user.model";
 
 export const LOG_OUT = '[Auth] LOG_OUT';
 
