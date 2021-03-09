@@ -1,4 +1,4 @@
-import {Body, Controller, Delete, Patch, Post, UseGuards} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Patch, Post, UseGuards} from '@nestjs/common';
 import { IUserDto } from './dto/user.dto';
 import { UsersService } from './users.service';
 import {AuthGuard} from "@nestjs/passport";
@@ -9,6 +9,12 @@ import {User} from "./orm/users.entity";
 export class UsersController {
     constructor(private usersService: UsersService){}
 
+
+    @Get('')
+    @UseGuards(AuthGuard())
+    getUsers(@GetUser() user: User){
+        return this.usersService.getUsers(user);
+    }
 
     @Post('user')
     @UseGuards(AuthGuard())

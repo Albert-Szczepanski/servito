@@ -1,0 +1,54 @@
+@import "../../../global";
+
+@media (min-width: 640px) {
+
+  .navigation{
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    display: flex;
+    width: 100px;
+    height: 100vh;
+    margin: 0;
+    transition: all .3s;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .content{
+    margin: 0;
+    margin-left: 100px;
+    width: calc(100vw - 100px);
+    height: 100vh;
+    transition: all .3s;
+    padding: 30px;
+  }
+}
+
+
+@media (max-width: 640px) {
+
+  .navigation{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    width: 100vw;
+    height: 100px;
+    margin: 0;
+    transition: all .3s;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .content{
+    margin: 0;
+    padding: 10px;
+    width: calc(100vw);
+    height: calc(100vh - 100px);
+    transition: all .3s;
+  }
+
+}
+
+

@@ -5,8 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
-import { UsersComponent } from './components/users/users.component';
-import { NavComponent } from './components/nav/nav.component';
+import { UsersComponent } from './components/home/users/users.component';
+import { NavComponent } from './components/home/nav/nav.component';
 import { TranslationsService } from './shared/translations/translations.service';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
@@ -15,7 +15,8 @@ import * as fromApp from './store/app.reducer'
 import {EffectsModule} from "@ngrx/effects";
 import {AuthEffects} from "./store/auth/auth.effects";
 import {FormsModule} from "@angular/forms";
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { DashboardComponent } from './components/home/dashboard/dashboard.component';
+
 
 @NgModule({
   declarations: [

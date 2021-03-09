@@ -1,0 +1,44 @@
+@import "../../../../global";
+
+.nav{
+  color: $primaryColorDark;
+  @media (max-width: 640px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+  }
+  &--item{
+    height: 100px;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .5s;
+    cursor: pointer;
+    @media (max-width: 640px) {
+      width: 70px;
+    }
+    &:hover{
+      background-color: $primaryColor;
+      transition: all .5s;
+      color: white;
+    }
+    &_only-mobile{
+      @media (min-width: 640px) {
+        display: none;
+      }
+    }
+    &_only-desktop{
+      @media (max-width: 640px) {
+        display: none;
+      }
+    }
+  }
+  span{
+    &.material-icons-outlined{
+      font-size: 50px;
+    }
+  }
+}
+

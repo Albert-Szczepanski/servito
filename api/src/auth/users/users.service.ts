@@ -72,5 +72,20 @@ export class UsersService {
         return await this.sharedService.saveUser(reqUser);
     }
 
+    async getUsers(reqUser: User): Promise<User[]>{
+        if (!reqUser.isAdmin){
+            throw new UnauthorizedException('Unauthorized')
+        }
+
+        const users = await this.usersRepository.find();
+
+        users.forEach(users => {
+            delete users.password;
+            delete users.salt;
+        })
+
+        return users;
+    }
+
 }
 
