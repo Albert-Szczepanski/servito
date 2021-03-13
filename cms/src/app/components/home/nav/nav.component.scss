@@ -9,16 +9,13 @@
     flex-direction: row;
   }
   &--item{
-    height: 100px;
-    width: 100px;
+    height: 50px;
+    width: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all .5s;
     cursor: pointer;
-    @media (max-width: 640px) {
-      width: 70px;
-    }
     &:hover{
       background-color: $primaryColor;
       transition: all .5s;
@@ -37,7 +34,7 @@
   }
   span{
     &.material-icons-outlined{
-      font-size: 50px;
+      font-size: 40px;
     }
   }
 }

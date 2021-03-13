@@ -40,7 +40,7 @@ export class AuthEffects {
   authSuccess = createEffect(() => this.actions$.pipe(
     ofType(AuthActions.GET_TOKEN_SUCCESS),
     tap(() => {
-      this.router.navigate(['home']);
+      this.router.navigate(['home/dashboard']);
     })
   ), {dispatch:false})
 
