@@ -1,0 +1,41 @@
+@import "../../../../global";
+
+.message-box{
+  border: 2px solid;
+  margin: 10px 0 10px 0;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  text-align: center;
+  &--error{
+    border-color: $alertColor;
+    color: $alertColor;
+    transition: all 0.4s;
+    animation-name: animate;
+    animation-duration: 0.7s;
+  }
+  &--success{
+    border-color: $successColor;
+    color: $successColor;
+    transition: all 0.4s;
+    animation-name: animate;
+    animation-duration: 0.7s;
+  }
+}
+
+@keyframes animate {
+  0% {
+    opacity: 0;
+    padding-bottom: -30px;
+    padding-top: -30px;
+    margin: -23px 0 -23px 0;
+  }
+  50% {
+    opacity: 0;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    margin: 10px 0 10px 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
