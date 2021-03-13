@@ -7,6 +7,7 @@ import * as fromApp from '../../store/app.reducer';
 import {NgForm} from "@angular/forms";
 import {State} from "../../store/auth/auth.reducer";
 import {Observable} from "rxjs";
+import {AlertEnum} from "../../shared/components/alert/alert.enum";
 
 
 @Component({
@@ -17,16 +18,18 @@ import {Observable} from "rxjs";
 export class LoginComponent implements OnInit {
 
   constructor(public infoService: TranslationsService, private store: Store<fromApp.AppState>) { }
+
   authState: Observable<State>
+  alertEnum = AlertEnum;
+
   ngOnInit(): void {
     this.authState = this.store.select('auth');
   }
 
-  //TODO przerobić na NGRXa
   getAuthToken(form: NgForm): void{
-    const test = new AuthRequestModel()
-    test.username = form.value.username;
-    test.password = form.value.password;
-    this.store.dispatch(new LoginActions.GetTokenStart(test))
+    const auth = new AuthRequestModel()
+    auth.username = form.value.username;
+    auth.password = form.value.password;
+    this.store.dispatch(new LoginActions.GetTokenStart(auth))
   }
 }

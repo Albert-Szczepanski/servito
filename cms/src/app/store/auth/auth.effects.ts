@@ -22,6 +22,7 @@ export class AuthEffects {
     ofType(AuthActions.GET_TOKEN_START),
     switchMap((authData: AuthActions.GetTokenStart) => {
 
+
       const requestBody = `grant_type=Bearer&password=${authData.payload.password}&username=${authData.payload.username}`;
       return this.http.post<IAuthToken>(environment.apiUrl + 'auth/sign-in', requestBody, options).
 

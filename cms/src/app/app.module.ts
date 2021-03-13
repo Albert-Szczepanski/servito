@@ -16,6 +16,9 @@ import {EffectsModule} from "@ngrx/effects";
 import {AuthEffects} from "./store/auth/auth.effects";
 import {FormsModule} from "@angular/forms";
 import { DashboardComponent } from './components/home/dashboard/dashboard.component';
+import { AlertComponent } from './shared/components/alert/alert.component';
+import { LoaderComponent } from './shared/components/loader/loader.component';
+import { CategoriesComponent } from './components/home/categories/categories.component';
 
 
 @NgModule({
@@ -25,7 +28,10 @@ import { DashboardComponent } from './components/home/dashboard/dashboard.compon
     HomeComponent,
     UsersComponent,
     NavComponent,
-    DashboardComponent
+    DashboardComponent,
+    AlertComponent,
+    LoaderComponent,
+    CategoriesComponent
   ],
   imports: [
     BrowserModule,

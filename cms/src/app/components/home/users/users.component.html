@@ -1,1 +1,23 @@
-
+<p>Users work</p>
+<table>
+  <tr>
+    <th>Nazwa użytkownika</th>
+    <th>Email</th>
+    <th>Reset Hasła</th>
+    <th>Admin</th>
+  </tr>
+  <tr *ngFor="let user of (usersState | async).Users">
+    <td>
+      {{user.username}}
+    </td>
+    <td>
+      {{user.email}}
+    </td>
+    <td>
+      {{user.passwordReset}}
+    </td>
+    <td>
+      {{user.isAdmin}}
+    </td>
+  </tr>
+</table>

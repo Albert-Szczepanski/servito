@@ -7,9 +7,8 @@
         </div>
         <h3 class="login-form--section_app-name">Servito CMS</h3>
       </div>
-      <div class="message-box message-box--alert" [ngClass]="{'message-box--alert_visible': (authState|async).message === 'LOGIN_FAILED'}">
-        <p>Nieprawidłowy login lub hasło</p>
-      </div>
+      <app-loader *ngIf="(authState | async).isLoading"></app-loader>
+      <app-alert [message]="'Błędne hasło lub login'" [alertType]="alertEnum.Error" *ngIf="(authState | async).message === 'LOGIN_FAILED'"></app-alert>
       <div class="login-form--section">
         <label class="login-form--section_element" for="username"> {{infoService.translations.username}} </label>
         <input class="login login-form--section_element"  ngModel name="username" id="username" type="text" placeholder="{{infoService.translations.yourUserName}}">
