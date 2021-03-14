@@ -33,7 +33,7 @@ export class AuthEffects {
           user.accessToken = res.accessToken
           return new AuthActions.GetTokenSuccess(user)
         }),
-        catchError(() => of(new AuthActions.GetTokenFailed('LOGIN_FAILED'))),
+        catchError(() => of()),
       )
     })
   ))
