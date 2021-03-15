@@ -44,7 +44,82 @@ button{
       cursor: pointer;
     }
   }
+  &.action{
+    border: none;
+    background-color: $primaryColorDark;
+    padding: 10px;
+    font-family: $primaryFont;
+    color: $fontLight;
+    cursor: pointer;
+    transition: background-color 0.5s;
+    &:hover{
+      background-color: $primaryColorLight;
+      transition: background-color 0.5s;
+      cursor: pointer;
+    }
+  }
 
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  background: $primaryColorLight;
+  border-radius: 1.3px;
+}
+input[type=range]::-webkit-slider-thumb {
+  width: 16px;
+  border-radius: 3px;
+  background: $primaryColorDark;
+  cursor: pointer;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: $primaryColorLight;
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  background: $primaryColorLight;
+}
+input[type=range]::-moz-range-thumb {
+  width: 16px;
+  border-radius: 3px;
+  background: $primaryColorDark;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  background: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: $primaryColorLight;
+}
+input[type=range]::-ms-fill-upper {
+  background: $primaryColorLight;
+}
+input[type=range]::-ms-thumb {
+  width: 16px;
+  border-radius: 3px;
+  background: $primaryColorDark;
+  cursor: pointer;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: $primaryColorLight;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: $primaryColorLight;
 }
 
 input{
@@ -63,6 +138,23 @@ input{
       outline: none;
       transition: color 0.5s, border-bottom 0.5s, margin 0.3s;
     }
+  }
+  &.form{
+    border: 1px solid $primaryColor;
+    height: 100%;
+    color: $fontDarkLighten;
+    transition: color 0.5s, border-bottom 0.5s, margin 0.3s;
+    &:focus{
+      color: $fontDark;
+      border: 1px solid $primaryColorDark;
+      outline: none;
+      transition: color 0.5s, border-bottom 0.5s, margin 0.3s;
+    }
+  }
+  &.form-range{
+
+
+
   }
 }
 

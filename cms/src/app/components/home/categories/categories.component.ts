@@ -5,6 +5,8 @@ import {Observable} from "rxjs";
 import {State} from "../../../store/categories/categories.reducer";
 import * as CategoryActions from "../../../store/categories/categories.actions"
 import {AlertEnum} from "../../../shared/components/alert/alert.enum";
+import {ICategory} from "../../../models/categories/category.interface";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-categories',
@@ -17,10 +19,22 @@ export class CategoriesComponent implements OnInit {
 
   categoriesState: Observable<State>
   alertEnum = AlertEnum;
+  addCategoryFormVisible = false;
+  sliderValue = 5;
 
   ngOnInit(): void {
     this.categoriesState = this.store.select("categories")
     this.store.dispatch(new CategoryActions.GetCategoriesStart())
+  }
+
+  switchAddCategoryFormState(): void {
+    this.addCategoryFormVisible = !this.addCategoryFormVisible
+  }
+
+  onAddCategory(form: NgForm): void {
+    const name: string = form.value.categoryName;
+    const priority: number = form.value.categoryRange;
+    this.store.dispatch(new CategoryActions.AddCategoryStart({name, priority}))
   }
 
 }

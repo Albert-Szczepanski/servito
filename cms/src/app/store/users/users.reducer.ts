@@ -21,14 +21,16 @@ export function usersReducer(
       return {
         ...state,
         Users: null,
-        isLoading: true
+        isLoading: true,
+        errorCode: null,
       }
 
     case UsersActions.GET_USERS_SUCCESS:
       return {
         ...state,
         Users: action.payload,
-        isLoading: false
+        isLoading: false,
+        errorCode: null
       }
 
     case UsersActions.GET_USERS_FAILED:

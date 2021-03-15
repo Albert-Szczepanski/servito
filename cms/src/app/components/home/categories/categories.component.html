@@ -2,18 +2,34 @@
 <p>Możesz dodawać, usuwać, edytować kategorie.
   Kategorie ułatwiają użytkownikowi nawigowanie po twojej stronie oraz
   wspomagają pozycjonowanie Twojej witryny</p>
-<table *ngIf="(categoriesState|async).Categories.length !== 0">
+
+<div class="alert-holder" *ngIf="(categoriesState|async).categories.length === 0">
+  <app-alert [message]="'Brak kategorii, utwórz jakąś ;)'" [alertType]="alertEnum.Info"></app-alert>
+</div>
+
+<button (click)="switchAddCategoryFormState()" class="primary">Dodaj kategorię</button>
+
+<form class="category-add-form" *ngIf="addCategoryFormVisible" (ngSubmit)="onAddCategory(form)" #form="ngForm">
+  <div class="category-add-form_section">
+    <input ngModel name="categoryName" class="form" placeholder="Nazwa nowej kategorii" id="categoryNameInput" type="text">
+  </div>
+  <div class="category-add-form_section">
+    <p>Priorytet wyświetania: {{sliderValue}}</p>
+    <input ngModel class="form-range" id="categoryPriorityRangeInput" min="1" max="10" type="range" name="categoryRange" [(ngModel)]="sliderValue">
+  </div>
+  <button type="submit" class="action">Dodaj</button>
+</form>
+
+<table *ngIf="(categoriesState|async).categories.length !== 0">
   <tr>
     <th>Nazwa</th>
     <th>Priorytet</th>
   </tr>
-  <tr *ngFor="let category of (categoriesState | async).Categories">
+  <tr *ngFor="let category of (categoriesState | async).categories">
     <td>{{category.name}}</td>
     <td>{{category.priority}}</td>
   </tr>
 </table>
 
-<div class="alert-holder" *ngIf="(categoriesState|async).Categories.length === 0">
-  <app-alert [message]="'Brak kategorii, utwórz jakąś ;)'" [alertType]="alertEnum.Info"></app-alert>
-</div>
+
 
