@@ -16,6 +16,7 @@ const initialState = {
 export function authReducer(
   state = initialState,
   action: AuthActions.AuthActions) {
+
   switch (action.type) {
 
     case AuthActions.GET_TOKEN_START:

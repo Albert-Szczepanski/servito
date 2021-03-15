@@ -1,6 +1,6 @@
 import {Actions, createEffect, ofType} from '@ngrx/effects'
 import * as AuthActions from './auth.actions'
-import {catchError, map, switchMap, tap} from "rxjs/operators";
+import {catchError, delay, map, switchMap, tap} from "rxjs/operators";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {IAuthToken} from "../../models/auth/auth-token.interface";
 import {environment} from "../../../environments/environment";
@@ -20,6 +20,7 @@ export class AuthEffects {
 
   authLogin = createEffect(() => this.actions$.pipe(
     ofType(AuthActions.GET_TOKEN_START),
+    delay(500),
     switchMap((authData: AuthActions.GetTokenStart) => {
 
 
@@ -31,9 +32,14 @@ export class AuthEffects {
           const user = new User();
           user.username = res.username;
           user.accessToken = res.accessToken
+          localStorage.setItem('username', res.username);
+          localStorage.setItem('accessToken', res.accessToken);
+
           return new AuthActions.GetTokenSuccess(user)
         }),
-        catchError(() => of()),
+        catchError(() => of(
+          new AuthActions.GetTokenFailed('LOGIN_FAILED')
+        )),
       )
     })
   ))
@@ -42,6 +48,14 @@ export class AuthEffects {
     ofType(AuthActions.GET_TOKEN_SUCCESS),
     tap(() => {
       this.router.navigate(['home/dashboard']);
+    })
+  ), {dispatch:false})
+
+  authLogOut = createEffect(() => this.actions$.pipe(
+    ofType(AuthActions.LOG_OUT),
+    tap(() => {
+      localStorage.clear();
+      this.router.navigate(['login']);
     })
   ), {dispatch:false})
 

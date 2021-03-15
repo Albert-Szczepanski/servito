@@ -1,15 +1,19 @@
-<p>categories works!</p>
-<table>
+<h1>Kategorie</h1>
+<p>Możesz dodawać, usuwać, edytować kategorie.
+  Kategorie ułatwiają użytkownikowi nawigowanie po twojej stronie oraz
+  wspomagają pozycjonowanie Twojej witryny</p>
+<table *ngIf="(categoriesState|async).Categories.length !== 0">
   <tr>
-    <th>Firstname</th>
-    <th>Lastname</th>
+    <th>Nazwa</th>
+    <th>Priorytet</th>
   </tr>
-  <tr>
-    <td>Peter</td>
-    <td>Griffin</td>
-  </tr>
-  <tr>
-    <td>Lois</td>
-    <td>Griffin</td>
+  <tr *ngFor="let category of (categoriesState | async).Categories">
+    <td>{{category.name}}</td>
+    <td>{{category.priority}}</td>
   </tr>
 </table>
+
+<div class="alert-holder" *ngIf="(categoriesState|async).Categories.length === 0">
+  <app-alert [message]="'Brak kategorii, utwórz jakąś ;)'" [alertType]="alertEnum.Info"></app-alert>
+</div>
+

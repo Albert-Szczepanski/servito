@@ -1,5 +1,4 @@
 import {Action} from "@ngrx/store";
-import {User} from "../../models/auth/user.model";
 import {IUser} from "../../models/users/user.interface";
 
 export const GET_USERS_START = '[Users] GET_USERS_START';
@@ -8,7 +7,6 @@ export const GET_USERS_FAILED = '[Users] GET_USERS_FAILED';
 
 export class GetUsersStart implements Action{
   readonly type = GET_USERS_START
-  constructor(public payload: User) {}
 }
 
 export class GetUsersSuccess implements Action{

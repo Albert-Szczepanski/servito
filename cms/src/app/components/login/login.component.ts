@@ -8,6 +8,7 @@ import {NgForm} from "@angular/forms";
 import {State} from "../../store/auth/auth.reducer";
 import {Observable} from "rxjs";
 import {AlertEnum} from "../../shared/components/alert/alert.enum";
+import {User} from "../../models/auth/user.model";
 
 
 @Component({
@@ -24,6 +25,12 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.authState = this.store.select('auth');
+    if (localStorage.getItem('username') && localStorage.getItem('accessToken')){
+      const user = new User()
+      user.username = localStorage.getItem('username');
+      user.accessToken = localStorage.getItem('accessToken');
+      this.store.dispatch(new LoginActions.GetTokenSuccess(user))
+    }
   }
 
   getAuthToken(form: NgForm): void{

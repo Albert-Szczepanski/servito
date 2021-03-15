@@ -7,8 +7,8 @@
         </div>
         <h3 class="login-form--section_app-name">Servito CMS</h3>
       </div>
-      <app-loader *ngIf="(authState | async).isLoading"></app-loader>
       <app-alert [message]="'Błędne hasło lub login'" [alertType]="alertEnum.Error" *ngIf="(authState | async).message === 'LOGIN_FAILED'"></app-alert>
+      <app-alert [message]="'Wylogowano pomyślne'" [alertType]="alertEnum.Success" *ngIf="(authState | async).message === 'LOGGED_OUT'"></app-alert>
       <div class="login-form--section">
         <label class="login-form--section_element" for="username"> {{infoService.translations.username}} </label>
         <input class="login login-form--section_element"  ngModel name="username" id="username" type="text" placeholder="{{infoService.translations.yourUserName}}">
@@ -25,3 +25,4 @@
     </div>
   </form>
 </section>
+<app-loader *ngIf="(authState | async).isLoading"></app-loader>

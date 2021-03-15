@@ -2,6 +2,9 @@
 
 h1{
   font-family: $headingFont;
+  font-weight: 200;
+  font-size: 45px;
+  color: $primaryColorDark;
 }
 h2{
   font-family: $headingFont;
@@ -17,6 +20,7 @@ h5{
 }
 p{
   font-family: $primaryFont;
+  max-width: 500px;
 }
 
 body, html{

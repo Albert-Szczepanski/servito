@@ -8,12 +8,13 @@ export interface State {
 const initialState = {
   Users: null,
   isLoading: false,
+  errorCode: null
 }
 
 export function usersReducer(
   state = initialState,
-  action: UsersActions.UsersActions
-){
+  action: UsersActions.UsersActions){
+
   switch (action.type){
 
     case UsersActions.GET_USERS_START:
@@ -33,7 +34,7 @@ export function usersReducer(
     case UsersActions.GET_USERS_FAILED:
       return {
         ...state,
-        Users: action.payload,
+        errorCode: action.payload,
         isLoading: false
       }
 

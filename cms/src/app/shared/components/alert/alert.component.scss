@@ -3,8 +3,7 @@
 .message-box{
   border: 2px solid;
   margin: 10px 0 10px 0;
-  padding-bottom: 5px;
-  padding-top: 5px;
+  padding: 7px 5px 5px;;
   text-align: center;
   &--error{
     border-color: $alertColor;
@@ -16,6 +15,13 @@
   &--success{
     border-color: $successColor;
     color: $successColor;
+    transition: all 0.4s;
+    animation-name: animate;
+    animation-duration: 0.7s;
+  }
+  &--info{
+    border-color: $primaryColor;
+    color: $primaryColor;
     transition: all 0.4s;
     animation-name: animate;
     animation-duration: 0.7s;

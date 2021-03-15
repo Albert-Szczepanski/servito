@@ -19,6 +19,9 @@ import { DashboardComponent } from './components/home/dashboard/dashboard.compon
 import { AlertComponent } from './shared/components/alert/alert.component';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { CategoriesComponent } from './components/home/categories/categories.component';
+import {UsersEffects} from "./store/users/users.effects";
+import { TableComponent } from './shared/components/table/table.component';
+import {CategoriesEffects} from "./store/categories/categories.effects";
 
 
 @NgModule({
@@ -31,14 +34,15 @@ import { CategoriesComponent } from './components/home/categories/categories.com
     DashboardComponent,
     AlertComponent,
     LoaderComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     StoreModule.forRoot(fromApp.appReducer),
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([AuthEffects, UsersEffects, CategoriesEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
     }),

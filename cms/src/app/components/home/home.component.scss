@@ -13,15 +13,22 @@
     transition: all .3s;
     justify-content: center;
     align-items: center;
+    animation: animate;
+    animation-duration: 1s;
   }
 
   .content{
     margin: 0;
     margin-left: 100px;
-    width: calc(100vw - 50px);
+    width: calc(100vw - 200px);
     height: 100vh;
     transition: all .3s;
     padding: 30px;
+  }
+
+  @keyframes animate {
+    0%{transform: translateX(-100px)}
+    100%{transform: translateX(0)}
   }
 }
 
@@ -39,6 +46,8 @@
     transition: all .3s;
     justify-content: center;
     align-items: center;
+    animation: animate;
+    animation-duration: 1s;
   }
 
   .content{
@@ -49,6 +58,15 @@
     transition: all .3s;
   }
 
+  @keyframes animate {
+    0%{transform: translateY(100px)}
+    100%{transform: translateY(0)}
+  }
+
 }
+
+
+
+
 
 
