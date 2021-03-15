@@ -9,6 +9,14 @@
 
 <button (click)="switchAddCategoryFormState()" class="primary">Dodaj kategorię</button>
 
+<div class="alert-holder" *ngIf="(categoriesState|async).errorCode === 406">
+  <app-alert [alertType]="alertEnum.Error" [message]="'Kategoria o tej nazwie już istnieje'"></app-alert>
+</div>
+
+<div class="alert-holder" *ngIf="(categoriesState|async).successMessage === 'ADD_CATEGORY_SUCCESS'">
+  <app-alert [alertType]="alertEnum.Success" [message]="'Kategoria została dodana'"></app-alert>
+</div>
+
 <form class="category-add-form" *ngIf="addCategoryFormVisible" (ngSubmit)="onAddCategory(form)" #form="ngForm">
   <div class="category-add-form_section">
     <input ngModel name="categoryName" class="form" placeholder="Nazwa nowej kategorii" id="categoryNameInput" type="text">
@@ -20,14 +28,14 @@
   <button type="submit" class="action">Dodaj</button>
 </form>
 
-<table *ngIf="(categoriesState|async).categories.length !== 0">
-  <tr>
-    <th>Nazwa</th>
-    <th>Priorytet</th>
+<table class="tbl" style="z-index: 2" *ngIf="(categoriesState|async).categories.length !== 0">
+  <tr class="tbl-heading">
+    <th class="tbl-heading_header">Nazwa</th>
+    <th class="tbl-heading_header">Priorytet</th>
   </tr>
-  <tr *ngFor="let category of (categoriesState | async).categories">
-    <td>{{category.name}}</td>
-    <td>{{category.priority}}</td>
+  <tr class="tbl-row" *ngFor="let category of (categoriesState | async).categories">
+    <td class="tbl-row_content" >{{category.name}}</td>
+    <td class="tbl-row_content" >{{category.priority}}</td>
   </tr>
 </table>
 

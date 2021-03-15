@@ -1,42 +1,126 @@
 @import "../../../../global";
 
-.alert-holder{
-  display: flex;
-  justify-content: left;
-  align-items: center;
+app-categories{
+  overflow-x: visible;
 }
 
-.category-add-form{
-  p{
-    margin: 0 10px;
+@media (min-width: 640px){
+
+  .alert-holder{
+    display: flex;
+    justify-content: left;
+    align-items: center;
   }
-  display: flex;
-  padding: 30px 0;
-  &_section{
-    padding-right: 10px;
+
+  .category-add-form{
+    p{
+      margin: 0 10px;
+    }
+    display: flex;
+    padding: 0px 0;
+
+    &_section{
+      padding-right: 10px;
+      display: flex;
+      flex-direction: column;
+      align-content: center;
+      justify-content: center;
+    }
+    animation: animate;
+    animation-duration: 1s;
+    transition: all 1s;
+    opacity: 1;
+  }
+
+}
+@media (max-width: 640px){
+
+  .alert-holder{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+  }
+
+  .category-add-form{
+    p{
+      margin: 0 10px;
+    }
+    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
-    align-content: center;
-    justify-content: center;
+    padding: 0px 0;
+    &_section{
+      padding-right: 10px;
+      display: flex;
+      flex-direction: column;
+      align-content: center;
+      justify-content: center;
+      height: 45px;
+      margin: 10px;
+      &--input{
+        height: 100%;
+        width: 100%;
+      }
+    }
+    animation: animate;
+    animation-duration: 1s;
+    transition: all 1s;
+    opacity: 1;
   }
-  animation: animate;
-  animation-duration: 1s;
-  transition: all 1s;
-  opacity: 1;
+
 }
+
 
 @keyframes animate {
   0%{
     opacity: 0;
     padding: -100px 0;
-    margin: -40px 0;
+    margin: -20px 0;
   }
   50%{
     opacity: 0;
-    padding: 30px 0;
+    padding: 0px 0;
     margin: 0;
   }
   100%{
     opacity: 1
   }
 }
+
+
+
+.tbl{
+  td, th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+  margin-bottom: 30px;
+
+  tr:nth-child(even){background-color: $lightColorDark;transition: all .5s}
+  tr:hover {background-color: $lightColorDarkest; transition: all .5s}
+  th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: $lightColor;
+    color: black;
+  }
+  margin-top: 20px;
+  text-align: left;
+  border-collapse: collapse;
+  width: 100%;
+  &-heading{
+    font-family: $primaryFont;
+    &_header{
+    }
+  }
+  &-row{
+    font-family: $primaryFont;
+    &_content{
+    }
+  }
+
+
+}
+

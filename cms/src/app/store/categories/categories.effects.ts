@@ -41,7 +41,7 @@ export class CategoriesEffects {
           return new CategoriesActions.AddCategorySuccess(res)
         }),
         catchError(err => {
-          return of(new CategoriesActions.AddCategoryFailed(err.code));
+          return of(new CategoriesActions.AddCategoryFailed(err.status));
         })
       )
     })

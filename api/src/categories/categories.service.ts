@@ -1,4 +1,4 @@
-import {Injectable, NotFoundException} from '@nestjs/common';
+import {Injectable, NotAcceptableException, NotFoundException} from '@nestjs/common';
 import {InjectRepository} from "@nestjs/typeorm";
 import {CategoriesRepository} from "./orm/categories.repository";
 import {Category} from "./orm/categories.entity";
@@ -18,7 +18,11 @@ export class CategoriesService {
 
     async createCategory(categoryDto: CategoryDto, user: User): Promise<Category>{
         await this.authSharedService.checkIfAdmin(user)
+
         const {name, priority} = categoryDto;
+        if (!name){throw new NotAcceptableException('Name is required')}
+        if (await this.categoriesRepository.findOne({name})){throw new NotAcceptableException('Item already exists')}
+
         const category = new Category()
         category.name = name;
         category.priority = priority;

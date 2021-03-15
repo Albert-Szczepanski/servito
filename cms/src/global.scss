@@ -9,6 +9,11 @@ $primaryColor: #9381ff;
 $secondaryColor: #662C91;
 $alertColor: #F49097;
 $successColor: #429EA6;
+$lightColor: #fff;
+
+$lightColorDark: darken($lightColor, 15%);
+$lightColorDarker: darken($lightColor, 25%);
+$lightColorDarkest: darken($lightColor, 35%);
 
 $fontDarkLighten: lighten($fontDark, 45%);
 
@@ -18,6 +23,7 @@ $alertColorDark: darken($alertColor, 15%);
 $successColorDark: darken($successColor, 15%);
 
 $primaryColorLight: lighten($primaryColor, 15%);
+$primaryColorSuperLight: lighten($primaryColor, 30%);
 $secondaryColorLight: lighten($secondaryColor, 15%);
 $alertColorLight: lighten($alertColor, 15%);
 $successColorLight: lighten($successColor, 15%);

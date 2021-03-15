@@ -3,12 +3,16 @@ import * as CategoryActions from "./categories.actions"
 
 export interface State {
   categories: ICategory[]
+  isLoading: boolean;
+  successMessage: string;
+  errorCode: number;
 }
 
 const initialState = {
   categories: null,
   isLoading: false,
-  errorMessage: null,
+  successMessage: null,
+  errorCode: null,
 }
 
 export function categoriesReducer(
@@ -20,21 +24,25 @@ export function categoriesReducer(
     case CategoryActions.GET_CATEGORIES_START:
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
+        successMessage: null,
+        errorCode: null,
       }
 
     case CategoryActions.GET_CATEGORIES_SUCCESS:
       return {
         ...state,
         categories: action.payload,
-        isLoading: false
+        isLoading: false,
+        errorCode: null
       }
 
     case CategoryActions.ADD_CATEGORY_START:
       return {
         ...state,
         isLoading: true,
-        errorMessage: null
+        successMessage: null,
+        errorCode: null
       }
 
     case CategoryActions.ADD_CATEGORY_SUCCESS:
@@ -42,21 +50,23 @@ export function categoriesReducer(
         ...state,
         categories: [...state.categories, action.payload],
         isLoading: false,
-        errorMessage: null
+        errorCode: null,
+        successMessage: 'ADD_CATEGORY_SUCCESS'
       }
 
     case CategoryActions.ADD_CATEGORY_FAILED:
       return {
         ...state,
         isLoading: false,
-        errorMessage: action.payload
+        errorCode: action.payload
       }
 
     case CategoryActions.DELETE_CATEGORY_START:
       return {
         ...state,
+        successMessage: null,
         isLoading: true,
-        errorMessage: null
+        errorCode: null
       }
 
     case CategoryActions.DELETE_CATEGORY_SUCCESS:
@@ -64,14 +74,15 @@ export function categoriesReducer(
         ...state,
         categories: state.categories.filter(category => category.id !== action.payload.id),
         isLoading: false,
-        errorMessage: null
+        errorCode: null,
+        successMessage: 'DELETE_CATEGORY_SUCCESS'
       }
 
     case CategoryActions.DELETE_CATEGORY_FAILED:
       return {
         ...state,
         isLoading: false,
-        errorMessage: action.payload
+        errorCode: action.payload
       }
 
 
@@ -79,7 +90,8 @@ export function categoriesReducer(
       return {
         ...state,
         isLoading: true,
-        errorMessage: null
+        errorCode: null,
+        successMessage: 'DELETE_CATEGORY_SUCCESS'
       }
 
     case CategoryActions.EDIT_CATEGORY_SUCCESS:
@@ -97,14 +109,14 @@ export function categoriesReducer(
         ...state,
         categories: updatedCategories,
         isLoading: false,
-        errorMessage: null
+        errorCode: null
       }
 
     case CategoryActions.EDIT_CATEGORY_FAILED:
       return {
         ...state,
         isLoading: false,
-        errorMessage: action.payload
+        errorCode: action.payload
       }
 
     default:
