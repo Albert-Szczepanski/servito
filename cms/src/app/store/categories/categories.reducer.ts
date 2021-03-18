@@ -70,6 +70,7 @@ export function categoriesReducer(
       }
 
     case CategoryActions.DELETE_CATEGORY_SUCCESS:
+      console.log(state.categories.filter(category => category.id !== action.payload.id))
       return {
         ...state,
         categories: state.categories.filter(category => category.id !== action.payload.id),

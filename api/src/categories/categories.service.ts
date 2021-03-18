@@ -1,4 +1,4 @@
-import {Injectable, NotAcceptableException, NotFoundException} from '@nestjs/common';
+import {BadRequestException, Injectable, NotAcceptableException, NotFoundException} from '@nestjs/common';
 import {InjectRepository} from "@nestjs/typeorm";
 import {CategoriesRepository} from "./orm/categories.repository";
 import {Category} from "./orm/categories.entity";
@@ -8,7 +8,6 @@ import {SharedService} from "../auth/shared.service";
 
 @Injectable()
 export class CategoriesService {
-    ObjectId = require('mongodb').ObjectId;
     constructor(
         @InjectRepository(CategoriesRepository)
         private categoriesRepository: CategoriesRepository,
@@ -20,7 +19,7 @@ export class CategoriesService {
         await this.authSharedService.checkIfAdmin(user)
 
         const {name, priority} = categoryDto;
-        if (!name){throw new NotAcceptableException('Name is required')}
+        if (!name){throw new BadRequestException('Name is required')}
         if (await this.categoriesRepository.findOne({name})){throw new NotAcceptableException('Item already exists')}
 
         const category = new Category()
@@ -32,9 +31,10 @@ export class CategoriesService {
 
     async deleteCategory(id: string, user:User): Promise<Category>{
         await this.authSharedService.checkIfAdmin(user);
-        const result = await this.categoriesRepository.findOne({where : {id: this.ObjectId(id)}});
+        const result = await this.categoriesRepository.findOne(id);
         if (!result){throw new NotFoundException('Object not found')}
         await result.remove()
+        result.id = id;
         return result;
     }
 

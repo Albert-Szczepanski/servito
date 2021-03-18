@@ -9,14 +9,6 @@
 
 <button (click)="switchAddCategoryFormState()" class="primary">Dodaj kategorię</button>
 
-<div class="alert-holder" *ngIf="(categoriesState|async).errorCode === 406">
-  <app-alert [alertType]="alertEnum.Error" [message]="'Kategoria o tej nazwie już istnieje'"></app-alert>
-</div>
-
-<div class="alert-holder" *ngIf="(categoriesState|async).successMessage === 'ADD_CATEGORY_SUCCESS'">
-  <app-alert [alertType]="alertEnum.Success" [message]="'Kategoria została dodana'"></app-alert>
-</div>
-
 <form class="category-add-form" *ngIf="addCategoryFormVisible" (ngSubmit)="onAddCategory(form)" #form="ngForm">
   <div class="category-add-form_section">
     <input ngModel name="categoryName" class="form" placeholder="Nazwa nowej kategorii" id="categoryNameInput" type="text">
@@ -28,16 +20,33 @@
   <button type="submit" class="action">Dodaj</button>
 </form>
 
-<table class="tbl" style="z-index: 2" *ngIf="(categoriesState|async).categories.length !== 0">
-  <tr class="tbl-heading">
-    <th class="tbl-heading_header">Nazwa</th>
-    <th class="tbl-heading_header">Priorytet</th>
-  </tr>
-  <tr class="tbl-row" *ngFor="let category of (categoriesState | async).categories">
-    <td class="tbl-row_content" >{{category.name}}</td>
-    <td class="tbl-row_content" >{{category.priority}}</td>
-  </tr>
-</table>
-
+<div class="categories-list">
+  <mat-expansion-panel *ngFor="let category of (categoriesState | async).categories">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <span class="priority">{{category.priority}}</span>{{category.name}}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <form (ngSubmit)="onEditCategory(category.id, form)" #form="ngForm">
+      <div class="categories-list--form">
+        <p>id: {{category.id}}</p>
+          <mat-form-field>
+            <mat-label>Nazwa kategorii</mat-label>
+            <input [(ngModel)]="category.name" matInput placeholder="Ex. Pizza" name="categoryName" value="{{category.name}}">
+          </mat-form-field>
+        <div class="categories-list--form_element">
+          <p>Priorytet wyświetlania: </p>
+          <mat-slider [(ngModel)]="category.priority" [color]="" min="1" max="10" step="1" name="categoryPriority" thumbLabel tickInterval="1" value=""></mat-slider>
+        </div>
+        <div class="categories-list--form_element">
+          <button type="submit" class="action">Wprowadź zmiany</button>
+        </div>
+        <div class="categories-list--form_element">
+        </div>
+      </div>
+    </form>
+    <button (click)="onDeleteCategory(category.id, category.name, category.priority)" type="button" class="danger">Usuń kategorię</button>
+  </mat-expansion-panel>
+</div>
 
 

@@ -1,5 +1,32 @@
 @import "../../../../global";
 
+.categories-list{
+  margin: 100px 0;
+  &--form{
+    display: flex;
+    flex-direction: column;
+    max-width: 550px;
+    &_element{
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 30px;
+
+    }
+  }
+}
+
+
+
+.priority{
+  border-radius: 30px;
+  background-color: $alertColor;
+  padding: 0 5px;
+  margin-right: 10px;
+  color: $lightColor;
+  font-family: $primaryFont;
+  font-weight: 600;
+}
+
 app-categories{
   overflow-x: visible;
 }
@@ -27,8 +54,8 @@ app-categories{
       justify-content: center;
     }
     animation: animate;
-    animation-duration: 1s;
-    transition: all 1s;
+    animation-duration: 0.5s;
+    transition: all 0.5s;
     opacity: 1;
   }
 
@@ -87,40 +114,4 @@ app-categories{
   }
 }
 
-
-
-.tbl{
-  td, th {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
-
-  margin-bottom: 30px;
-
-  tr:nth-child(even){background-color: $lightColorDark;transition: all .5s}
-  tr:hover {background-color: $lightColorDarkest; transition: all .5s}
-  th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: $lightColor;
-    color: black;
-  }
-  margin-top: 20px;
-  text-align: left;
-  border-collapse: collapse;
-  width: 100%;
-  &-heading{
-    font-family: $primaryFont;
-    &_header{
-    }
-  }
-  &-row{
-    font-family: $primaryFont;
-    &_content{
-    }
-  }
-
-
-}
 

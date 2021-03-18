@@ -58,6 +58,20 @@ button{
       cursor: pointer;
     }
   }
+  &.danger{
+    border: none;
+    background-color: $alertColor;
+    padding: 10px;
+    font-family: $primaryFont;
+    color: $fontLight;
+    cursor: pointer;
+    transition: background-color 0.5s;
+    &:hover{
+      background-color: $alertColorDark;
+      transition: background-color 0.5s;
+      cursor: pointer;
+    }
+  }
 
 }
 
@@ -172,3 +186,29 @@ input{
   }
 }
 
+
+.toast{
+  &--alert{
+    background-color: $alertColorDark;
+    color: white;
+    .mat-simple-snackbar-action {
+      color: white;
+    }
+  }
+  &--info{
+
+  }
+  &--success{
+    .mat-simple-snackbar-action {
+      color: white;
+    }
+    color: white;
+    background-color: $primaryColorDark;
+  }
+}
+
+
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

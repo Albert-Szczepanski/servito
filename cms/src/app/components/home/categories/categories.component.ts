@@ -7,6 +7,8 @@ import * as CategoryActions from "../../../store/categories/categories.actions"
 import {AlertEnum} from "../../../shared/components/alert/alert.enum";
 import {ICategory} from "../../../models/categories/category.interface";
 import {NgForm} from "@angular/forms";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import {ToastService} from "../../../shared/services/toast.service";
 
 @Component({
   selector: 'app-categories',
@@ -15,7 +17,7 @@ import {NgForm} from "@angular/forms";
 })
 export class CategoriesComponent implements OnInit {
 
-  constructor(private store: Store<fromApp.AppState>) { }
+  constructor(private store: Store<fromApp.AppState>, private snackBar: MatSnackBar, private toastService: ToastService) { }
 
   categoriesState: Observable<State>
   alertEnum = AlertEnum;
@@ -35,6 +37,18 @@ export class CategoriesComponent implements OnInit {
     const name: string = form.value.categoryName;
     const priority: number = form.value.categoryRange;
     this.store.dispatch(new CategoryActions.AddCategoryStart({name, priority}))
+  }
+
+  onEditCategory(id: string, form:NgForm): void{
+
+    const name: string = form.value.categoryName;
+    const priority: number = form.value.categoryPriority;
+
+    this.store.dispatch(new CategoryActions.EditCategoryStart({id, name, priority}))
+  }
+
+  onDeleteCategory(id: string, name: string, priority: number): void{
+    this.store.dispatch(new CategoryActions.DeleteCategoryStart({id, name, priority}))
   }
 
 }

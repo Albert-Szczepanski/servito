@@ -9,20 +9,27 @@ import { UsersComponent } from './components/home/users/users.component';
 import { NavComponent } from './components/home/nav/nav.component';
 import { TranslationsService } from './shared/translations/translations.service';
 import { HttpClientModule } from '@angular/common/http';
+
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import * as fromApp from './store/app.reducer'
-import {EffectsModule} from "@ngrx/effects";
-import {AuthEffects} from "./store/auth/auth.effects";
-import {FormsModule} from "@angular/forms";
+import { EffectsModule } from "@ngrx/effects";
+import { AuthEffects } from "./store/auth/auth.effects";
+
+import { FormsModule } from "@angular/forms";
 import { DashboardComponent } from './components/home/dashboard/dashboard.component';
 import { AlertComponent } from './shared/components/alert/alert.component';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { CategoriesComponent } from './components/home/categories/categories.component';
-import {UsersEffects} from "./store/users/users.effects";
-import { TableComponent } from './shared/components/table/table.component';
-import {CategoriesEffects} from "./store/categories/categories.effects";
+import { UsersEffects } from "./store/users/users.effects";
+import { CategoriesEffects } from "./store/categories/categories.effects";
 
+import * as fromApp from './store/app.reducer';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { MatExpansionModule } from "@angular/material/expansion";
+import { MatSliderModule } from "@angular/material/slider";
+import {MatInputModule} from "@angular/material/input";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {ToastService} from "./shared/services/toast.service";
 
 @NgModule({
   declarations: [
@@ -35,7 +42,6 @@ import {CategoriesEffects} from "./store/categories/categories.effects";
     AlertComponent,
     LoaderComponent,
     CategoriesComponent,
-    TableComponent
   ],
   imports: [
     BrowserModule,
@@ -47,8 +53,15 @@ import {CategoriesEffects} from "./store/categories/categories.effects";
       maxAge: 25, // Retains last 25 states
     }),
     FormsModule,
+    BrowserAnimationsModule,
+    MatExpansionModule,
+    MatSliderModule,
+    MatExpansionModule,
+    MatSliderModule,
+    MatInputModule,
+    MatSnackBarModule,
   ],
-  providers: [TranslationsService],
+  providers: [TranslationsService, ToastService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
