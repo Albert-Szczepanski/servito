@@ -1,24 +1,50 @@
 <h1>Użytkownicy</h1>
-<p>Możesz dodawać i usuwać użytkowników. Użytkownik który jest administratorem może się zalogować do Servito i wspomagać cię w tworzeniu nowej zawartości</p>
-<table>
-  <tr>
-    <th>Nazwa użytkownika</th>
-    <th>Email</th>
-    <th>Reset Hasła</th>
-    <th>Admin</th>
-  </tr>
-  <tr *ngFor="let user of (usersState | async).Users">
-    <td>
+<p>Możesz dodawać i usuwać użytkowników.
+  Użytkownik który jest administratorem może
+  się zalogować do Servito i wspomagać cię w
+  tworzeniu nowej zawartości</p>
+
+<button class="primary" (click)="onShowUserForm()">Dodaj użytkownika</button>
+
+<form *ngIf="addUserFormVisible" (ngSubmit)="onAddUser(form)" class="simple-add-form" #form="ngForm">
+  <div class="simple-add-form_section">
+    <mat-form-field>
+      <input ngModel name="userName" matInput placeholder="Nazwa użytkownika" type="text">
+    </mat-form-field>
+  </div>
+  <div class="simple-add-form_section">
+    <mat-form-field>
+
+      <input name="userMail"
+             matInput
+             placeholder="Adres email użytkownika"
+             type="email"
+             ngModel>
+
+    </mat-form-field>
+  </div>
+  <button type="submit" class="action">Dodaj</button>
+
+</form>
+
+<div class="users-list">
+
+  <mat-expansion-panel *ngFor="let user of (usersState | async).Users">
+    <mat-expansion-panel-header>
+    <mat-panel-title>
       {{user.username}}
-    </td>
-    <td>
-      {{user.email}}
-    </td>
-    <td>
-      {{user.passwordReset}}
-    </td>
-    <td>
-      {{user.isAdmin}}
-    </td>
-  </tr>
-</table>
+    </mat-panel-title>
+    </mat-expansion-panel-header>
+    <p>id: {{user.id}}</p>
+    <p>email: {{user.email}}</p>
+    <mat-slide-toggle labelPosition="before" [checked]="user.passwordReset">Reset hasła</mat-slide-toggle>
+    <br>
+    <mat-slide-toggle labelPosition="before" [checked]="user.isAdmin">Czy jest administratorem?</mat-slide-toggle>
+    <br>
+    <br>
+    <button class="primary">Zapisz zmiany</button>
+  </mat-expansion-panel>
+
+</div>
+
+

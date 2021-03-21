@@ -1,4 +1,4 @@
-<section>
+<section *ngIf="!isFirstLogin">
   <form class="border-shadow" (ngSubmit)="getAuthToken(form)" #form="ngForm">
     <div class="login-form">
       <div class="login-form--section">
@@ -10,16 +10,53 @@
       <app-alert [message]="'Błędne hasło lub login'" [alertType]="alertEnum.Error" *ngIf="(authState | async).message === 'LOGIN_FAILED'"></app-alert>
       <app-alert [message]="'Wylogowano pomyślne'" [alertType]="alertEnum.Success" *ngIf="(authState | async).message === 'LOGGED_OUT'"></app-alert>
       <div class="login-form--section">
-        <label class="login-form--section_element" for="username"> {{infoService.translations.username}} </label>
-        <input class="login login-form--section_element"  ngModel name="username" id="username" type="text" placeholder="{{infoService.translations.yourUserName}}">
+        <label class="login-form--section_element" for="username"> {{translationsService.translations.logIn.username}} </label>
+        <input class="login login-form--section_element"  ngModel name="username" id="username" type="text" placeholder="{{translationsService.translations.logIn.yourUserName}}">
       </div>
       <div class="login-form--section">
-        <label class="login-form--section_element" for="password">{{infoService.translations.password}}</label>
-        <input class="login login-form--section_element" ngModel name="password" id="password" type="password" placeholder="{{infoService.translations.yourPassword}}">
+        <label class="login-form--section_element" for="password">{{translationsService.translations.logIn.password}}</label>
+        <input class="login login-form--section_element" ngModel name="password" id="password" type="password" placeholder="{{translationsService.translations.logIn.yourPassword}}">
       </div>
       <div class="login-form--section">
         <button type="submit" class="login-form--section_button primary">
-          {{infoService.translations.logIn}}
+          {{translationsService.translations.logIn.logIn}}
+        </button>
+      </div>
+    </div>
+  </form>
+</section>
+
+<section *ngIf="isFirstLogin">
+  <form class="border-shadow" (ngSubmit)="userCreate(formRegister)" #formRegister="ngForm">
+    <div class="login-form">
+      <div class="login-form--section">
+        <div class="login-form--section_image">
+          <img src="../../../assets/favicon.png" alt="">
+        </div>
+        <h3 class="login-form--section_app-name">Servito CMS</h3>
+      </div>
+      <app-alert [message]="'Błędne hasło lub login'" [alertType]="alertEnum.Error" *ngIf="(authState | async).message === 'LOGIN_FAILED'"></app-alert>
+      <app-alert [message]="'Wylogowano pomyślne'" [alertType]="alertEnum.Success" *ngIf="(authState | async).message === 'LOGGED_OUT'"></app-alert>
+      <div class="login-form--section">
+        <label class="login-form--section_element" for="username"> {{translationsService.translations.logIn.username}} </label>
+        <input class="login login-form--section_element"  ngModel name="usernamereg" id="usernamereg" required="required" type="text" placeholder="{{translationsService.translations.logIn.yourUserName}}">
+      </div>
+      <div class="login-form--section">
+        <label class="login-form--section_element" for="username"> {{translationsService.translations.logIn.email}} </label>
+        <input class="login login-form--section_element"  ngModel name="email" id="email" email="true" required="required" type="email" placeholder="{{translationsService.translations.logIn.yourEmail}}">
+      </div>
+      <br>
+      <div class="login-form--section">
+        <label class="login-form--section_element" for="password">{{translationsService.translations.logIn.password}}</label>
+        <input class="login login-form--section_element" ngModel name="passwordreg" id="passwordreg" required="required" type="password" placeholder="{{translationsService.translations.logIn.yourPassword}}">
+      </div>
+      <div class="login-form--section">
+        <label class="login-form--section_element" for="password">{{translationsService.translations.logIn.repeatPassword}}</label>
+        <input class="login login-form--section_element" ngModel name="repasswordreg" id="repasswordreg" required="required" type="password" placeholder="{{translationsService.translations.logIn.yourPassword}}">
+      </div>
+      <div class="login-form--section">
+        <button type="submit" class="login-form--section_button primary">
+          {{translationsService.translations.logIn.register}}
         </button>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import {Injectable, UnauthorizedException} from '@nestjs/common';
+import {BadRequestException, Injectable, NotAcceptableException, UnauthorizedException} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IUserDto } from './dto/user.dto';
 import { UsersRepository } from './orm/users.repository';
@@ -11,9 +11,12 @@ export class UsersService {
                 private usersRepository: UsersRepository, private sharedService: SharedService){}
 
     async createUser(userDto: IUserDto, reqUser: User): Promise<User>{
-        console.log(reqUser)
         await this.sharedService.checkIfAdmin(reqUser);
         const { username, email, password, passwordReset } = userDto;
+        if (!username){throw new BadRequestException('Username is empty')}
+        if (await this.sharedService.getUserInfoByUserName(username)){
+            throw new NotAcceptableException('User Already exists')
+        }
         const user = new User();
         user.email = email;
         user.salt = await this.sharedService.generateSalt();

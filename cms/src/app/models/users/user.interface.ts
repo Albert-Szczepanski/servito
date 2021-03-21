@@ -5,3 +5,9 @@ export interface IUser {
   isAdmin: boolean;
   passwordReset: boolean;
 }
+
+export interface IUserRegister {
+  username: string;
+  email: string;
+  password: string;
+}

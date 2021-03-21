@@ -15,7 +15,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from "@ngrx/effects";
 import { AuthEffects } from "./store/auth/auth.effects";
 
-import { FormsModule } from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { DashboardComponent } from './components/home/dashboard/dashboard.component';
 import { AlertComponent } from './shared/components/alert/alert.component';
 import { LoaderComponent } from './shared/components/loader/loader.component';
@@ -30,6 +30,10 @@ import { MatSliderModule } from "@angular/material/slider";
 import {MatInputModule} from "@angular/material/input";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {ToastService} from "./shared/services/toast.service";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import { PostsComponent } from './components/home/posts/posts.component';
+import { PostComponent } from './components/home/posts/post/post.component';
+import { EditorComponent } from './shared/components/editor/editor.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +46,9 @@ import {ToastService} from "./shared/services/toast.service";
     AlertComponent,
     LoaderComponent,
     CategoriesComponent,
+    PostsComponent,
+    PostComponent,
+    EditorComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +67,8 @@ import {ToastService} from "./shared/services/toast.service";
     MatSliderModule,
     MatInputModule,
     MatSnackBarModule,
+    MatSlideToggleModule,
+    ReactiveFormsModule,
   ],
   providers: [TranslationsService, ToastService],
   bootstrap: [AppComponent]

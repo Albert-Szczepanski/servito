@@ -5,7 +5,6 @@ import {Observable} from "rxjs";
 import {State} from "../../../store/categories/categories.reducer";
 import * as CategoryActions from "../../../store/categories/categories.actions"
 import {AlertEnum} from "../../../shared/components/alert/alert.enum";
-import {ICategory} from "../../../models/categories/category.interface";
 import {NgForm} from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import {ToastService} from "../../../shared/services/toast.service";

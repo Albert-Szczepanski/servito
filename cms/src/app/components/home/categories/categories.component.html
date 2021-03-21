@@ -9,11 +9,13 @@
 
 <button (click)="switchAddCategoryFormState()" class="primary">Dodaj kategorię</button>
 
-<form class="category-add-form" *ngIf="addCategoryFormVisible" (ngSubmit)="onAddCategory(form)" #form="ngForm">
-  <div class="category-add-form_section">
-    <input ngModel name="categoryName" class="form" placeholder="Nazwa nowej kategorii" id="categoryNameInput" type="text">
+<form class="simple-add-form" *ngIf="addCategoryFormVisible" (ngSubmit)="onAddCategory(form)" #form="ngForm">
+  <div class="simple-add-form_section">
+    <mat-form-field>
+      <input ngModel name="categoryName" matInput placeholder="Nazwa nowej kategorii" id="categoryNameInput" type="text">
+    </mat-form-field>
   </div>
-  <div class="category-add-form_section">
+  <div class="simple-add-form_section">
     <p>Priorytet wyświetania: {{sliderValue}}</p>
     <input ngModel class="form-range" id="categoryPriorityRangeInput" min="1" max="10" type="range" name="categoryRange" [(ngModel)]="sliderValue">
   </div>
