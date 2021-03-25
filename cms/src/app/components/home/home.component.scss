@@ -24,7 +24,6 @@
     height: 100vh;
     transition: all .3s;
     padding: 30px;
-    overflow: auto;
   }
 
   @keyframes animate {
@@ -57,7 +56,6 @@
     width: calc(100vw - 20px);
     height: calc(100vh - 75px);
     transition: all .3s;
-    overflow: auto;
   }
 
   @keyframes animate {

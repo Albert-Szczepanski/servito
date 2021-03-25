@@ -1,2 +1,56 @@
 <h1>Centrum</h1>
 <p>Zobacz statystki swojej witryny</p>
+
+
+
+<div class="container">
+  <div class="card border-shadow" (click)="navigateTo('posts')">
+    <div class="card--sticker">Test</div>
+    <div class="card--container">
+      <span class="material-icons-outlined card--item">
+        create
+      </span>
+      <p class="card--item" >Wpisy</p>
+    </div>
+  </div>
+
+  <div class="card border-shadow" (click)="navigateTo('services')">
+    <div class="card--sticker">Test</div>
+    <div class="card--container">
+      <span class="material-icons-outlined card--item">
+        home_repair_service
+      </span>
+      <p class="card--item" >Usługi</p>
+    </div>
+  </div>
+
+  <div class="card border-shadow" (click)="navigateTo('users')">
+    <div class="card--sticker">
+      <app-tiny-loader *ngIf="!(UsersState| async).Users">
+      </app-tiny-loader>
+      {{(UsersState | async).Users.length}}
+    </div>
+    <div class="card--container">
+      <span class="material-icons-outlined card--item">
+        people
+      </span>
+      <p class="card--item" >Użytkownicy</p>
+    </div>
+  </div>
+
+  <div class="card border-shadow" (click)="navigateTo('categories')">
+    <div class="card--sticker">
+      <app-tiny-loader *ngIf="!(CategoriesState| async).categories">
+      </app-tiny-loader>
+      {{(CategoriesState | async).categories.length}}
+    </div>
+    <div class="card--container">
+      <span class="material-icons-outlined card--item">
+        category
+      </span>
+      <p class="card--item" >Kategorie</p>
+    </div>
+  </div>
+
+</div>
+

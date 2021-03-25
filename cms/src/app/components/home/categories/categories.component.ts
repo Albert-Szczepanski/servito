@@ -25,7 +25,6 @@ export class CategoriesComponent implements OnInit {
 
   ngOnInit(): void {
     this.categoriesState = this.store.select("categories")
-    this.store.dispatch(new CategoryActions.GetCategoriesStart())
   }
 
   switchAddCategoryFormState(): void {

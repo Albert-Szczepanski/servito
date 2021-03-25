@@ -26,7 +26,7 @@ p{
 body, html{
   padding: 0;
   margin: 0;
-  overflow: hidden;
+  overflow: auto;
 }
 
 button{
@@ -187,6 +187,36 @@ input{
     flex-direction: column;
     align-content: flex-start;
     justify-content: center;
+  }
+  animation: animate;
+  animation-duration: 0.5s;
+  transition: all 0.5s;
+  opacity: 1;
+}
+
+.add-form{
+  p{
+    margin: 0 10px;
+  }
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0px 0;
+  max-width: 550px;
+  flex-direction: column;
+  &_section{
+    padding-right: 10px;
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: center;
+  }
+  &--row_section{
+    padding-right: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-grow: 1;
   }
   animation: animate;
   animation-duration: 0.5s;

@@ -34,6 +34,12 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import { PostsComponent } from './components/home/posts/posts.component';
 import { PostComponent } from './components/home/posts/post/post.component';
 import { EditorComponent } from './shared/components/editor/editor.component';
+import { ServicesComponent } from './components/home/services/services.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
+import {MatRadioModule} from '@angular/material/radio';
+
+import { TinyLoaderComponent } from './shared/components/tiny-loader/tiny-loader.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +55,8 @@ import { EditorComponent } from './shared/components/editor/editor.component';
     PostsComponent,
     PostComponent,
     EditorComponent,
+    ServicesComponent,
+    TinyLoaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,6 +77,9 @@ import { EditorComponent } from './shared/components/editor/editor.component';
     MatSnackBarModule,
     MatSlideToggleModule,
     ReactiveFormsModule,
+    MatCheckboxModule,
+    MatSelectModule,
+    MatRadioModule
   ],
   providers: [TranslationsService, ToastService],
   bootstrap: [AppComponent]

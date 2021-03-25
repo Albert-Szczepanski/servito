@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import * as CategoriesActions from "./categories.actions"
-import {catchError, map, switchMap, withLatestFrom} from "rxjs/operators";
+import {catchError, delay, map, switchMap, withLatestFrom} from "rxjs/operators";
 import {ICategory} from "../../models/categories/category.interface";
 import {environment} from "../../../environments/environment";
 import {of, pipe} from "rxjs";

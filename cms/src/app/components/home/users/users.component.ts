@@ -20,7 +20,6 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.usersState = this.store.select('users')
-    this.store.dispatch(new UsersActions.GetUsersStart())
   }
 
   onShowUserForm(): void{

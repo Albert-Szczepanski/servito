@@ -1,0 +1,56 @@
+<h1>Usługi</h1>
+<p>Możesz zarządzać swoimi usługami które pojawiają się na stronie.</p>
+
+<button (click)="onShowServiceForm()" class="primary">Dodaj usługę</button>
+
+<form *ngIf="addServiceFormVisible" class="add-form" #form="ngForm">
+
+  <div class="add-form_section">
+    <mat-form-field>
+      <input ngModel name="userName" matInput placeholder="Nazwa usługi" type="text">
+    </mat-form-field>
+  </div>
+
+  <div class="add-form_section">
+    <mat-form-field>
+      <textarea ngModel name="userName" matInput placeholder="Krótki opis" type="text"></textarea>
+    </mat-form-field>
+  </div>
+
+  <div class="add-form--row_section">
+    <mat-checkbox>Pokaż cenę</mat-checkbox>
+    <mat-radio-group aria-label="Select an option">
+      <mat-radio-button value="1">Kwoty zaczynają się od</mat-radio-button>
+      <mat-radio-button value="2">Wskaż przedział</mat-radio-button>
+    </mat-radio-group>
+    <mat-form-field>
+      <input name="userMail" matInput placeholder="Kwota" type="number" ngModel>
+    </mat-form-field>
+  </div>
+
+  <div class="add-form_section">
+    <mat-form-field appearance="fill">
+      <mat-label>Wybierz kategorię</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let category of (CategoriesState | async).categories" value="{{category.name}}">{{category.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="add-form_section">
+    <button type="submit" class="action">Dodaj</button>
+  </div>
+</form>
+
+
+<div class="services-list">
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Tytuł
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+  </mat-expansion-panel>
+
+</div>
